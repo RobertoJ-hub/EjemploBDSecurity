@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</head>
+<style type="text/css">
+	@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+	
+		
+		.tbl-header{
+  			background-color: rgba(255,255,255,0.3);
+ 			width: 100%;
+ 		}
+ 		
+		.tbl-content{
+  			height:400px;
+			overflow-x:auto;
+			margin-top: 0px;
+			border: 1px solid rgba(255,255,255,0.3);
+		}
+		th{
+			width: 200px;
+			padding: 20px 15px;
+  			text-align: rigth;
+  			font-weight: 500;
+  			font-size: 15px;
+  			color: #fff;
+  			text-transform: uppercase;
+  			text-align:center;
+		}
+		.email{
+			width: 200px;
+		}
+		.accion{
+			width: 400px;		
+		}
+			
+		td{
+			width: 202px;
+			padding: 15px;
+  			text-align: center;
+  			vertical-align:middle;
+  			font-weight: 100;
+  			font-size: 15px;
+  			color: #fff;
+  			border-bottom: solid 1px rgba(255,255,255,0.1);
+		}
+			
+		.btn { 
+			margin-bottom: 0; font-size: 15px; 
+			line-height: 20px; color: #333333; 
+			text-align: center;
+			text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); 
+			vertical-align: middle; 
+			background-color: #f5f5f5; 
+			background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); 
+			background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); 
+			background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); 
+			background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); 
+			background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); 
+			background-image: linear-gradient(top, #ffffff, #e6e6e6); 
+			background-repeat: repeat-x; 
+			filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); 
+			border-color: #e6e6e6 #e6e6e6 #e6e6e6; 
+			border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); 
+			border: 1px solid #e6e6e6; -webkit-border-radius: 4px; 
+			-moz-border-radius: 4px; border-radius: 4px; 
+			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); 
+			-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); 
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); 
+			cursor: pointer; 
+			*margin-left: .3em; 
+			}
+		.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { 
+			background-color: #e6e6e6; 
+		}
+		.btn-large { 
+			padding: 9px 14px; 
+			font-size: 15px; 
+			line-height: normal; 
+			-webkit-border-radius: 5px; 
+			-moz-border-radius: 5px; 
+			border-radius: 5px; 
+		}
+		.btn:hover { 
+			color: #333333; 
+			text-decoration: none; 
+			background-color: #e6e6e6; 
+			background-position: 0 -15px; 
+			-webkit-transition: background-position 0.1s linear; 
+			-moz-transition: background-position 0.1s linear; 
+			-ms-transition: background-position 0.1s linear; 
+			-o-transition: background-position 0.1s linear; 
+			transition: background-position 0.1s linear; 
+		}
+		
+		.btn-primary, .btn-primary:hover { 
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); 
+			color: #ffffff; 
+		}
+		.btn-p{
+			color: blue;		
+		}
+		
+		.btn-danger{
+			color: red;
+		}
+		.btn-success{
+			color: green;
+		}
+		.btn-primary.active { 
+			color: rgba(255, 255, 255, 0.75); 
+		}
+		.btn-primary { 
+			background-color: #4a77d4; 
+			background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); 
+			background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); 
+			background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); 
+			background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); 
+			background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); 
+			background-image: linear-gradient(top, #6eb6de, #4a77d4); 
+			background-repeat: repeat-x; 
+			filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  
+			border: 1px solid #3762bc; 
+			text-shadow: 1px 1px 1px rgba(0,0,0,0.4); 
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); 
+		}
+		.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { 
+			filter: none; 
+			background-color: #4a77d4; 
+		}
+		.btn-block { 
+			width: 100%; 
+		}
+		
+		* { 
+			-webkit-box-sizing:border-box; 
+			-moz-box-sizing:border-box; 
+			-ms-box-sizing:border-box; 
+			-o-box-sizing:border-box; 
+			box-sizing:border-box; 
+		}
+		html{
+			width: 100%;
+			height: 100%;
+		}
+		body { 
+			width: 100%;
+			height:100%;
+			font-family: 'Open Sans', sans-serif;
+			background: #092756;
+			background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+			background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+			background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+			background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+			background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+		}
+		
+		.mensaje { 
+			position: static;
+			top: 10%;
+			width: 100%;
+			text-align: left;
+		}
+		.botones{
+			float: left;
+			position: static;
+			top: 10%;
+			width: 49%;
+			text-align: center;
+		}
+		.btnER{
+			text-align: center;
+		}
+		.mensaje h1 { 
+			color: #fff; 
+			text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+			letter-spacing:1px;  
+		}
+		
+</style>
+<body>
+	<header th:insert="layouts/cabecera.html" :: cabecera> </header>
+	
+	<div class="mensaje">
+		<h1>Bienvenido <span sec:authentication="name">Nombre</span><span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span></h1>
+		<h1 sec:authorize="hasAuthority('basico')">Contacte con un administrador para realizar cambio de ROL</h1>
+	</div>
+	
+	<div sec:authorize="hasAuthority('admin')" class="botones">
+		<form th:action="@{/guardar}">
+			<input type="submit" class="btn btn-primary" value="Agregar nuevo empleado">
+		</form>
+	</div>
+	<div sec:authorize="hasAuthority('admin')" class="btnER">
+		<form th:action="@{/editarRoles}">
+			<input type="submit" class="btn btn-primary" value="Editar Roles de usuario">
+		</form>
+	</div>	
+	<div th:if="${comprobacion}== true " class="alert alert-danger" role="alert">ERROR! EL CORREO YA EXISTE EN OTRO EMPLOYEE
+	</div>
+	 <br>
+	
+	<div class="tbl-header" sec:authorize="hasAnyAuthority('admin','invitado')">  
+		<table> 
+	  		<thead>
+	    		<tr>
+	      			<th scope="col">NOMBRE</th>
+	      			<th scope="col">APELLIDO</th>
+	      			<th class="email" scope="col">Email</th>
+	      			<th scope="col">TRABAJO</th>
+	      			<th scope="col">DEPARTAMENTO</th>
+	      			<th class="accion" scope="col">Acciones</th>
+	    		</tr>
+	  		</thead>
+	  	</table>
+	  </div>
+	  
+	  <div class="tbl-content"  sec:authorize="hasAnyAuthority('admin','invitado')">
+	  	<table>
+	  		<tbody>
+	    		<tr th:each="tmp : ${datos}">
+	      		<td th:text="${tmp.getFIRSTNAME()}"></td>
+	      		<td th:text="${tmp.getLASTNAME()}"></td>
+	      		<td th:text="${tmp.getEMAIL()}"></td>
+	      		<td th:text="${tmp.job.JOB_TITLE}"></td>
+	      		<td th:text="${tmp.departments != null} ? *{tmp.departments.DEPARTMENT_NAME}: 'Sin resultado'"></td>
+	      		<td class="accion">
+	      			<a th:href="@{/verMasEmpleado/} + *{tmp.EMPLOYEE_ID}">
+	       				<button type="submit" class="btn btn-p">
+	       					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+</svg>
+	       				</button>
+	      			</a> 
+		  			<a sec:authorize="hasAuthority('admin')" th:href="@{/editar/} + *{tmp.EMPLOYEE_ID}">
+	       				<button type="submit" class="btn btn-success">
+	       					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+  								<path d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+							</svg>
+	       				</button>
+	      			</a> 
+		  			<a sec:authorize="hasAuthority('admin')" th:href="@{/eliminar/} + *{tmp.EMPLOYEE_ID}">
+	       				<button type="submit" class="btn btn-danger" value="Eliminar">
+	       					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg>
+	       				</button>
+	      			</a>
+		  		</td>
+	    	</tr>  
+	  	</tbody>
+	</table>
+	 </div>
+
+</body>
+
+</html>
